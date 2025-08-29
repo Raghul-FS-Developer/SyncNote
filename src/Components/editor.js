@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
 function Editor({ onLogin, user }) {
+
+  const url = 'https://syncnote-9c0h.onrender.com/'
   //Dummy data
   const [socket, setSocket] = useState(null);
   const [lines, setLines] = useState([
@@ -16,7 +18,9 @@ function Editor({ onLogin, user }) {
   const [locks, setLocks] = useState({}); // { lineIndex: username }
 
   useEffect(() => {
-    const socketIo = io("http://localhost:4000"); //socket connection
+    const socketIo = io(url, {
+  transports: ["websocket"],
+}); //socket connection
     setSocket(socketIo);
 
     //To get latest data when user login
