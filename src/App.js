@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useLayoutEffect,useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import LoginPage from "./Components/login";
+import Editor from "./Components/editor";
+
 
 function App() {
+
+ 
+  const [user, setUser] = useState('');
+
+  // Only for inital page rendering
+  useLayoutEffect(() => {
+    const storedUser = localStorage.getItem("username");
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+       
+      <Routes>
+        <Route
+          path="/"
+          element={
+            user ? (
+              <Editor onLogin={setUser} user={user} />
+            ) : (
+              <LoginPage onLogin={setUser} />
+            )
+          }
+        />
+      </Routes>
+    </>
   );
 }
 
