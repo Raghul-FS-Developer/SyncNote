@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
-
 function Editor({ onLogin, user }) {
-  
   //Dummy data
-  const [socket,setSocket] = useState(null)
+  const [socket, setSocket] = useState(null);
   const [lines, setLines] = useState([
     "This is line 1",
     "This is line 2",
@@ -13,24 +11,27 @@ function Editor({ onLogin, user }) {
     "This is line 4",
     "This is line 5",
   ]);
-  
+
   const [activeLine, setActiveLine] = useState(null);
   const [locks, setLocks] = useState({}); // { lineIndex: username }
-  
-  useEffect(() => {
 
+  useEffect(() => {
     const socketIo = io("http://localhost:4000"); //socket connection
-    setSocket(socketIo)
-    
+    setSocket(socketIo);
+
+    //To get latest data when user login
+    socketIo.on("updated_lines", (updatedLines) => {
+      if (updatedLines.length > 0) updatedLines.forEach((e) => setLines(e));
+    });
+
     // Listen for events from server
     socketIo.on("line_locked", ({ lineIndex, username }) => {
       setLocks((prev) => ({ ...prev, [lineIndex]: username }));
-    }); 
+    });
 
-    socketIo.on("live_updates", ({newLines})=>{
-      setLines(newLines)
-     
-    })
+    socketIo.on("live_updates", ({ newLines }) => {
+      setLines(newLines);
+    });
     socketIo.on("line_unlocked", ({ lineIndex }) => {
       setLocks((prev) => {
         const updated = { ...prev };
@@ -40,10 +41,9 @@ function Editor({ onLogin, user }) {
     });
 
     return () => {
-      
-      socketIo?.disconnect()
+      socketIo?.disconnect();
     };
-  },[]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("username");
@@ -55,7 +55,7 @@ function Editor({ onLogin, user }) {
     setLines((prev) => {
       const newLines = [...prev];
       newLines[i] = newValue;
-      socket?.emit("live_updates",{newLines})
+      socket?.emit("live_updates", { newLines });
       return newLines;
     });
   };
@@ -72,7 +72,7 @@ function Editor({ onLogin, user }) {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8 relative">
-      {/* Logout button */}     
+      {/* Logout button */}
       <button
         onClick={handleLogout}
         className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition"
@@ -92,7 +92,7 @@ function Editor({ onLogin, user }) {
               onBlur={() => handleBlur(i)}
               onChange={(e) => handleLines(e, i)}
               disabled={locks[i] && locks[i] !== user} // disable if another user is editing
-              className={`w-full border rounded p-2 shadow-sm focus:outline-none ${
+              className={`w-full pr-36 border rounded p-2 shadow-sm focus:outline-none ${
                 locks[i] && locks[i] !== user
                   ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                   : "bg-white focus:ring-2 focus:ring-blue-400"
