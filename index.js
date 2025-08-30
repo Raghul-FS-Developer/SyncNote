@@ -10,9 +10,10 @@ io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
   io.emit("updated_lines", latestData); // sending the latest data when user login
+  io.emit("inital_linelocks", locks); // sending current lock to user who logins later
 
   socket.on("line_locked", ({ lineIndex, username }) => {
-    locks[socket.id] = lineIndex; // { D6O9u8TsDZQQdWc2AAAS: 1 }
+    locks[socket.id] = { lineIndex, username }; // { V6rbeLx_1BAK4aXmAAAE: { lineIndex: 2, username: 'r' } }
 
     io.emit("line_locked", { lineIndex, username });
   });
@@ -31,10 +32,10 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
-
-    if (locks[socket.id] !== undefined) {
-      io.emit("line_unlocked", { lineIndex: locks[socket.id] }); // Triggering unlock incase user got disconnected
+    if (locks[socket.id]) {
+      const lineIndex = locks[socket.id].lineIndex;
       delete locks[socket.id];
+      io.emit("line_unlocked", { lineIndex });
     }
   });
 });
