@@ -3,7 +3,7 @@ import io from "socket.io-client";
 
 function Editor({ onLogin, user }) {
 
-  const url = 'https://syncnote-9c0h.onrender.com/'
+  const url = 'http://localhost:4000'
   //Dummy data
   const [socket, setSocket] = useState(null);
   const [lines, setLines] = useState([
