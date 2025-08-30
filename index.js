@@ -8,7 +8,7 @@ let locks = {}; //stores data of locked indexes
 let latestData = []; // stores data on every line updates
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
-  
+
   io.emit("updated_lines", latestData); // sending the latest data when user login
   io.emit("inital_linelocks", locks); // sending current lock to user who logins later
 
