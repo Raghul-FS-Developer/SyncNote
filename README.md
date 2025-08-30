@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# 📄 Collaborative Editor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A real-time collaborative editor where multiple users can work on the same shared document.
+The key requirement was:
+👉 **when one user edits a line, it should be locked so that no other user can edit the same line until it is released.**
 
-## Available Scripts
+In addition, the editor has been enhanced to support **live document updates** so that every user sees changes instantly, keeping the document fully synchronized.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* 🔒 **Line-level locking** – ensures only one user can edit a line at a time
+* ⚡ **Live updates** – any change is instantly visible to all users
+* 👥 **Multi-user support** – multiple collaborators can work in real-time
+* 🔗 **Socket.IO integration** – bi-directional event-based communication
+* 🖥️ **React-based UI** – clean, simple, and responsive interface
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠️ Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* **Frontend:** React, TailwindCSS
+* **Backend:** Node.js, Socket.IO
+* **Runtime:** Node.js
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2️⃣ Install dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Frontend:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cd client
+npm install
+```
 
-### `npm run eject`
+Backend:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+cd server
+npm install
+```
+### 3️⃣ URL replacement
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Frontend: change the url into [http://localhost:4000]
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 4️⃣ Run locally
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Backend:
 
-## Learn More
+```bash
+cd server
+npm run dev
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Frontend:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+cd client
+npm start
+```
 
-### Code Splitting
+### 4️⃣ Access the app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Open [http://localhost:3000] in your browser.
