@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
 function Editor({ onLogin, user }) {
-
-  const url = 'https://syncnote-production.up.railway.app'
+  const url = "http://localhost:4000";
   //Dummy data
   const [socket, setSocket] = useState(null);
   const [lines, setLines] = useState([
@@ -18,11 +17,18 @@ function Editor({ onLogin, user }) {
   const [locks, setLocks] = useState({}); // { lineIndex: username }
 
   useEffect(() => {
-    const socketIo = io(url, {
-  transports: ["websocket"],
-}); //socket connection
+    //socket connection
+    const socketIo = io(url);
     setSocket(socketIo);
 
+    socketIo.on("inital_linelocks", (serverLocks) => {
+      // locking the lines on initial render which locked by user already
+      const newLocks = {};
+      Object.values(serverLocks).forEach(({ lineIndex, username }) => {
+        newLocks[lineIndex] = username;
+      });
+      setLocks(newLocks);
+    });
     //To get latest data when user login
     socketIo.on("updated_lines", (updatedLines) => {
       if (updatedLines.length > 0) updatedLines.forEach((e) => setLines(e));
