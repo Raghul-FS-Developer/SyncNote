@@ -7,7 +7,7 @@ function LoginPage({onLogin}){
     e.preventDefault();
     if(name){
         name.trim()
-        localStorage.setItem("username", name);
+        sessionStorage.setItem("username", name);
         onLogin(name)
     }
     

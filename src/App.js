@@ -12,7 +12,7 @@ function App() {
 
   // Only for inital page rendering
   useLayoutEffect(() => {
-    const storedUser = localStorage.getItem("username");
+    const storedUser = sessionStorage.getItem("username");
     if (storedUser) {
       setUser(storedUser);
     }
