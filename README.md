@@ -1,8 +1,3 @@
-Great 👌 let’s turn your project description into a **polished GitHub README template**.
-This structure will impress interviewers/recruiters because it clearly explains **what it is, how it works, and how to run it**.
-
----
-
 # 📄 Collaborative Editor
 
 A real-time collaborative editor where multiple users can work on the same shared document.
@@ -31,21 +26,6 @@ In addition, the editor has been enhanced to support **live document updates** s
 
 ---
 
-## 📷 Demo
-
-*(You can add a screenshot or a short GIF here showing two users editing together)*
-
----
-
-## ⚙️ Setup Instructions
-
-### 1️⃣ Clone the repository
-
-```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
-```
-
 ### 2️⃣ Install dependencies
 
 Frontend:
@@ -61,14 +41,17 @@ Backend:
 cd server
 npm install
 ```
+### 3️⃣ URL replacement
 
-### 3️⃣ Run locally
+Frontend: change the url into [http://localhost:4000]
+
+### 4️⃣ Run locally
 
 Backend:
 
 ```bash
 cd server
-npm start
+npm run dev
 ```
 
 Frontend:
@@ -80,18 +63,4 @@ npm start
 
 ### 4️⃣ Access the app
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## 🔮 Future Improvements
-
-* User presence indicators (see who’s online)
-* Track edit history for each line
-* Support for larger documents with pagination
-
----
-
-👉 This README not only explains your **thinking** but also makes it easy for anyone (including interviewers) to **clone and try your project**.
-
-Do you want me to also **write the GIF demo creation steps** (like using `screen-recorder` + `gifify`) so you can add a live collaboration preview in the README? That really impresses recruiters.
+Open [http://localhost:3000] in your browser.
